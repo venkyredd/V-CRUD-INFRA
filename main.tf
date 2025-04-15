@@ -178,7 +178,7 @@ resource "aws_ecs_task_definition" "v_task_def" {
 
   container_definitions = jsonencode([{
     name      = "v-container"
-    image     = var.image_url # <-- use TF var, pass it via GitHub secrets
+    image     = "011528270926.dkr.ecr.us-east-1.amazonaws.com/v/crud-p1:latest"
     essential = true
     portMappings = [{
       containerPort = 80,
@@ -216,12 +216,6 @@ resource "aws_ecs_service" "v_service" {
   }
 
   depends_on = [aws_lb_listener.v_listener]
-}
-
-# Variables
-variable "image_url" {
-  description = "Docker image URL for ECS Task"
-  type        = string
 }
 
 # Outputs
